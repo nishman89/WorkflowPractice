@@ -25,7 +25,7 @@ jobs:
       working-directory: SafariPark_Final
     - name: Test
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=lcov.info
-      working-directory: SafariPark_Final#
+      working-directory: SafariPark_Final
     - name : coverlet
       uses: b3b00/coverlet-action@1.1.9
       with:
@@ -33,3 +33,8 @@ jobs:
         output: 'lcov.info'
         outputFormat: 'lcov'
         excludes: '[program]*,[test]test.*'
+    - name: coveralls      
+      uses: coverallsapp/github-action@v1.1.1
+      with:
+          github-token: ${{secrets.GITHUB_TOKEN }} 
+          path-to-lcov: SafariPark_Final/SafariParkTests/lcov.info
