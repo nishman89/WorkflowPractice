@@ -5,7 +5,11 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+    
+defaults:
+  run:
+    working-directory: ./SafariPark_Final
+    
 jobs:
   build:
 
@@ -22,10 +26,8 @@ jobs:
       working-directory: SafariPark_Final
     - name: Build
       run: dotnet build --no-restore
-      working-directory: SafariPark_Final
     - name: Test
       run: dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=lcov.info
-      working-directory: SafariPark_Final
     - name : coverlet
       uses: b3b00/coverlet-action@1.1.9
       with:
